@@ -13,6 +13,8 @@
         <module>rabbitmq/rabbitmq-producer</module>
         <module>rabbitmq/rabbitmq-consumer</module>
         <module>websocket</module>
+        <module>dubbo/dubbo-provider</module>
+        <module>dubbo/dubbo-consumer</module>
     </modules>
 
     <name>technology</name>

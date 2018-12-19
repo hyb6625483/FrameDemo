@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableRabbit   //开启基于注解的RabbitMQ模式
 @SpringBootApplication
-public class ConsumerApplication {
+public class RabbitConsumerApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConsumerApplication.class);
+        SpringApplication.run(RabbitConsumerApplication.class);
     }
 }
