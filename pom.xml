@@ -10,7 +10,9 @@
     <modules>
         <module>mybatis</module>
         <module>redis</module>
-        <module>rabbitmq</module>
+        <module>rabbitmq/rabbitmq-producer</module>
+        <module>rabbitmq/rabbitmq-consumer</module>
+        <module>websocket</module>
     </modules>
 
     <name>technology</name>

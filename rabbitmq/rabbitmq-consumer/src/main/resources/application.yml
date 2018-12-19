@@ -1,0 +1,32 @@
+spring:
+  rabbitmq:
+    addresses: 106.13.36.105:5680
+    username: admin
+    password: admin..
+    virtual-host: /
+    connection-timeout: 15000
+    listener:
+      simple:
+        prefetch: 1               # 限流策略：同一时间只有1条消息发送过来消费
+        acknowledge-mode: manual  # 签收模式：手动签收
+        concurrency: 5            # 基本并发：5
+        max-concurrency: 10       # 最大并发：10
+  #编码格式
+  http:
+    encoding:
+      charset: utf-8
+  #参数格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+#tomcat配置
+server:
+  port: 8082
+  servlet:
+    context-path: /

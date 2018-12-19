@@ -1,0 +1,8 @@
+spring:
+  mvc: #静态资源路径配置
+    static-path-pattern: /**
+  servlet:  #文件上传路径
+    multipart:
+      location: E://Files
+  resources:  #添加默认的内部目录和自定义目录
+    static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, file:${spring.servlet.multipart.location}
