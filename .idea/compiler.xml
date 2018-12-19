@@ -7,14 +7,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="mybatis" />
+        <module name="rabbitmq-consumer" />
+        <module name="rabbitmq-producer" />
         <module name="redis" />
+        <module name="websocket" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="1.8" />
       <module name="mybatis" target="1.7" />
+      <module name="rabbitmq-consumer" target="1.8" />
+      <module name="rabbitmq-producer" target="1.7" />
       <module name="redis" target="1.7" />
       <module name="technology" target="1.8" />
+      <module name="websocket" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

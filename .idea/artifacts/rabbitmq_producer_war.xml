@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rabbitmq-producer:war">
+    <output-path>$PROJECT_DIR$/rabbitmq/rabbitmq-producer/target</output-path>
+    <root id="archive" name="rabbitmq-producer.war">
+      <element id="artifact" artifact-name="rabbitmq-producer:war exploded" />
+    </root>
+  </artifact>
+</component>

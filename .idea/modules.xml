@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/mybatis/mybatis.iml" filepath="$PROJECT_DIR$/mybatis/mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq/rabbitmq-consumer/rabbitmq-consumer.iml" filepath="$PROJECT_DIR$/rabbitmq/rabbitmq-consumer/rabbitmq-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rabbitmq/rabbitmq-producer/rabbitmq-producer.iml" filepath="$PROJECT_DIR$/rabbitmq/rabbitmq-producer/rabbitmq-producer.iml" />
       <module fileurl="file://$PROJECT_DIR$/redis/redis.iml" filepath="$PROJECT_DIR$/redis/redis.iml" />
       <module fileurl="file://$PROJECT_DIR$/technology.iml" filepath="$PROJECT_DIR$/technology.iml" />
+      <module fileurl="file://$PROJECT_DIR$/websocket/websocket.iml" filepath="$PROJECT_DIR$/websocket/websocket.iml" />
     </modules>
   </component>
 </project>
