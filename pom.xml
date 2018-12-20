@@ -15,6 +15,7 @@
         <module>websocket</module>
         <module>dubbo/dubbo-provider</module>
         <module>dubbo/dubbo-consumer</module>
+        <module>dubbo/dubbo-common</module>
     </modules>
 
     <name>technology</name>

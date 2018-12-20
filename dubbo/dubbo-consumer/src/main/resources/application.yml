@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: dubbo-consumer
+  #dubbo配置
+  dubbo:
+    application:
+      name: consumer  #提供者名字
+    registry:
+      address: zookeeper://112.74.55.15:2181  #Zookeeper注册中心地址
+    base-package: com.dubbo.demo
+  #编码格式
+  http:
+    encoding:
+      charset: utf-8
+  #参数格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  freemarker:
+    suffix: .html  #设置模板后缀名
+    content-type: text/html #设置文档类型
+    charset: UTF-8    #设置页面编码格式
+    cache: false   #设置页面缓存
+    template-loader-path: classpath:/templates  #设置html文件路径
+    settings:
+      number_format: '0.##'   #数字格式化，无小数点
+  mvc: #设置静态文件路径，js,css等
+    static-path-pattern: /static/**
+  servlet:  #文件上传路径
+    multipart:
+      location: E://Files
+  resources:  #添加默认的内部目录和自定义目录
+    static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, file:${spring.servlet.multipart.location}
+
+#服务配置
+server:
+  port: 8081
+  servlet:
+    context-path: /
