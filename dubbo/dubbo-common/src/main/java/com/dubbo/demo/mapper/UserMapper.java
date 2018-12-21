@@ -1,32 +1,30 @@
 package com.dubbo.demo.mapper;
 
 import com.dubbo.demo.entity.User;
-import com.dubbo.demo.entityExample.UserExample;
-
+import com.dubbo.demo.example.UserExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-    int countByExample(UserExample example) throws Exception;
+    int countByExample(UserExample example);
 
-    int deleteByExample(UserExample example) throws Exception;
+    int deleteByExample(UserExample example);
 
-    int deleteByPrimaryKey(Integer userId) throws Exception;
+    int deleteByPrimaryKey(Integer userId);
 
-    int insert(User record) throws Exception;
+    int insert(User record);
 
-    int insertSelective(User record) throws Exception;
+    int insertSelective(User record);
 
-    List<User> selectByExample(UserExample example) throws Exception;
+    List<User> selectByExample(UserExample example);
 
-    User selectByPrimaryKey(Integer userId) throws Exception;
+    User selectByPrimaryKey(Integer userId);
 
-    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example) throws Exception;
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByExample(@Param("record") User record, @Param("example") UserExample example) throws Exception;
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
 
-    int updateByPrimaryKeySelective(User record) throws Exception;
+    int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record) throws Exception;
+    int updateByPrimaryKey(User record);
 }

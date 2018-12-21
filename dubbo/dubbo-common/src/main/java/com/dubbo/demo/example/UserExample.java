@@ -1,4 +1,4 @@
-package com.dubbo.demo.entityExample;
+package com.dubbo.demo.example;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -2,7 +2,7 @@ package com.dubbo.demo.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.dubbo.demo.entity.User;
-import com.dubbo.demo.entityExample.UserExample;
+import com.dubbo.demo.example.UserExample;
 import com.dubbo.demo.mapper.UserMapper;
 import com.dubbo.demo.service.UserService;
 import com.github.pagehelper.PageHelper;
@@ -10,7 +10,7 @@ import com.github.pagehelper.PageInfo;
 
 import javax.annotation.Resource;
 
-@Service(version = "1.0",timeout = 5000)
+@Service(version = "1.0")
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;

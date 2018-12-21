@@ -5,7 +5,15 @@
     <title>首页</title>
 </head>
 <body>
-    用户：${user.name}<br/>
-    创建时间：${user.createName}
+    <#if user??>
+        用户：${user.loginName!}<br/>
+        创建时间：${user.createTime?string('yyyy-MM-dd HH:mm:ss')}
+    </#if>
+    <#if userList??>
+        <#list userList as user>
+            用户：${user.loginName!}<br/>
+            创建时间：${user.createTime?string('yyyy-MM-dd HH:mm:ss')}<br/>
+        </#list>
+    </#if>
 </body>
 </html>

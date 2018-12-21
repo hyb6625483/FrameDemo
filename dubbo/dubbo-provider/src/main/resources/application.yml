@@ -28,7 +28,7 @@ spring:
     default-property-inclusion: non_null
 #mybatis配置
 mybatis:
-  mapper-locations: classpath*:com.dubbo.demo.mapper.*.xml  #mapper文件路径
+  mapper-locations: classpath*:mappers/*.xml  #mapper文件路径
   type-aliases-package: com.dubbo.demo.entity   #实体类路径
 # 分页配置
 pagehelper:
