@@ -12,9 +12,7 @@
     <artifactId>websocket</artifactId>
     <packaging>war</packaging>
 
-    <name>websocket Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <description>Websocket project for Spring Boot</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
