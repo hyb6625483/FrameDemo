@@ -3,10 +3,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>technology</artifactId>
-        <groupId>com.gather</groupId>
+        <artifactId>springboot-learn</artifactId>
+        <groupId>cn.ovoll</groupId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,12 +15,6 @@
     <name>dubbo-consumer Maven Webapp</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -33,16 +26,16 @@
             <groupId>com.gitee.reger</groupId>
             <artifactId>spring-boot-starter-dubbo</artifactId>
             <version>1.1.2</version>
-            <!--<exclusions>
-                <exclusion> &lt;!&ndash;排除dubbo版本依赖&ndash;&gt;
+            <exclusions>
+                <exclusion> <!--排除dubbo版本依赖-->
                     <groupId>com.alibaba</groupId>
                     <artifactId>dubbo</artifactId>
                 </exclusion>
-                <exclusion>  &lt;!&ndash;排除zookeeper版本依赖&ndash;&gt;
+                <exclusion>  <!--排除zookeeper版本依赖-->
                     <groupId>com.101tec</groupId>
                     <artifactId>zkclient</artifactId>
                 </exclusion>
-            </exclusions>-->
+            </exclusions>
         </dependency>
         <!--dubbo-->
         <dependency>
@@ -67,7 +60,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.gather</groupId>
+            <groupId>cn.ovoll</groupId>
             <artifactId>dubbo-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <exclusions>
