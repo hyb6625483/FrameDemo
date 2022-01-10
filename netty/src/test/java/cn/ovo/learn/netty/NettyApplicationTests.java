@@ -9,15 +9,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.nio.channels.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -206,6 +204,76 @@ class NettyApplicationTests {
 
     @Test
     void nioClientTest() throws IOException {
+        // 创建客户端
+        SocketChannel socketChannel = SocketChannel.open();
+        // 与服务端建立连接
+        socketChannel.connect(new InetSocketAddress(8080));
+        System.out.println("waiting.....");
+    }
+
+    @Test
+    void nioSelectorServerTest() throws IOException {
+        // 1. 创建Selector，可以管理多个channel
+        Selector selector = Selector.open();
+        // 2. 创建服务器Channel，设置非阻塞模式并绑定端口
+        ServerSocketChannel socketChannel = ServerSocketChannel.open();
+        socketChannel.configureBlocking(false);
+        socketChannel.bind(new InetSocketAddress(8080));
+        // 3. 将channel与selector绑定，并指定Selection Key关注的事件，channel产生事件时可以通过selection key知道是哪个channel的事件
+        socketChannel.register(selector, SelectionKey.OP_ACCEPT);
+        while (true) {
+            // 4. 没有事件产生时，阻塞线程，有事件产生时，线程恢复运行
+            selector.select();
+            // 5. 获取所有发生的事件
+            Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+            while (keys.hasNext()) {
+                // 获取当前事件的key
+                SelectionKey key = keys.next();
+                // 将事件从集合中删除
+                keys.remove();
+                // 区分事件
+                if (key.isAcceptable()) {// 获取产生事件的channel
+                    ServerSocketChannel channel = (ServerSocketChannel) key.channel();
+                    // 与客户端建立连接
+                    SocketChannel connect = channel.accept();
+                    log.info("有客户端建立连接。。。 {}", connect);
+                    // 设置线程非阻塞
+                    connect.configureBlocking(false);
+                    // 将客户端连接与selector绑定，并设置buffer
+                    connect.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(16));
+                } else if (key.isReadable()) {
+                    try {
+                        SocketChannel channel = (SocketChannel) key.channel();
+                        ByteBuffer buffer = (ByteBuffer) key.attachment();
+                        // 如果是正常断开，read()返回-1
+                        int i = channel.read(buffer);
+                        if (i == -1) {
+                            log.info("close... {}", channel);
+                            key.cancel();
+                        } else {
+                            split(buffer);
+                            if (buffer.position() == buffer.limit()) {
+                                ByteBuffer newBuffer = ByteBuffer.allocate(buffer.capacity() * 2);
+                                buffer.flip();
+                                newBuffer.put(buffer);
+                                key.attach(newBuffer);
+                            }
+                            buffer.flip();
+                            log.info(StandardCharsets.UTF_8.decode(buffer).toString());
+                            buffer.clear();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        // 将channel从selector中删除
+                        key.cancel();
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    void nioSelectorClientTest() throws IOException {
         // 创建客户端
         SocketChannel socketChannel = SocketChannel.open();
         // 与服务端建立连接
