@@ -1,4 +1,4 @@
-package cn.ovo.learn.netty.nio;
+package cn.ovo.learn.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
