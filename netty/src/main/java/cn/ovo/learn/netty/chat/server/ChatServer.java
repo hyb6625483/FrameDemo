@@ -3,6 +3,7 @@ package cn.ovo.learn.netty.chat.server;
 import cn.ovo.learn.netty.chat.protocol.MessageCodecSharable;
 import cn.ovo.learn.netty.chat.protocol.ProcotolFrameDecoder;
 import cn.ovo.learn.netty.chat.server.handler.ChatRequestMessageHandler;
+import cn.ovo.learn.netty.chat.server.handler.GroupCreateRequestMessageHandler;
 import cn.ovo.learn.netty.chat.server.handler.LoginRequestMessageHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -20,6 +21,7 @@ public class ChatServer {
     private static final MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
     private static final LoginRequestMessageHandler LOGIN_HANDLER = new LoginRequestMessageHandler();
     private static final ChatRequestMessageHandler CHAT_HANDLER = new ChatRequestMessageHandler();
+    public static final GroupCreateRequestMessageHandler GROUP_CREATE_HANDLER = new GroupCreateRequestMessageHandler();
 
     public static void main(String[] args) {
         EventLoopGroup boss = new NioEventLoopGroup();
@@ -35,6 +37,7 @@ public class ChatServer {
                     ch.pipeline().addLast(MESSAGE_CODEC);
                     ch.pipeline().addLast(LOGIN_HANDLER);
                     ch.pipeline().addLast(CHAT_HANDLER);
+                    ch.pipeline().addLast(GROUP_CREATE_HANDLER);
                 }
             });
             Channel channel = serverBootstrap.bind(8080).sync().channel();

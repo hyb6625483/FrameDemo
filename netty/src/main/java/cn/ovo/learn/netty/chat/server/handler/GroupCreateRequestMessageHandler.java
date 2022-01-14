@@ -11,27 +11,25 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.List;
-import java.util.Set;
 
 @ChannelHandler.Sharable
 public class GroupCreateRequestMessageHandler extends SimpleChannelInboundHandler<GroupCreateRequestMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GroupCreateRequestMessage msg) throws Exception {
         String groupName = msg.getGroupName();
-        Set<String> members = msg.getMembers();
         // 群管理器
-        GroupSession groupSession = GroupSessionFactory.getGroupSession();
-        Group group = groupSession.createGroup(groupName, members);
+        GroupSession session = GroupSessionFactory.getGroupSession();
+        Group group = session.createGroup(groupName, msg.getMembers());
         if (group == null) {
-            // 发生成功消息
-            ctx.writeAndFlush(new GroupCreateResponseMessage(true, groupName + "创建成功"));
+            // 发生创建成功消息
+            ctx.writeAndFlush(new GroupCreateResponseMessage(true, "群组【" + groupName + "】创建成功"));
             // 发送拉群消息
-            List<Channel> channels = groupSession.getMembersChannel(groupName);
+            List<Channel> channels = session.getMembersChannel(groupName);
             for (Channel channel : channels) {
-                channel.writeAndFlush(new GroupCreateResponseMessage(true, "您已被拉入" + groupName));
+                channel.writeAndFlush(new GroupCreateResponseMessage(true, "您已被拉入【" + groupName + "】群组"));
             }
         } else {
-            ctx.writeAndFlush(new GroupCreateResponseMessage(false, groupName + "已经存在"));
+            ctx.writeAndFlush(new GroupCreateResponseMessage(false, "群组【" + groupName + "】已存在"));
         }
     }
 }

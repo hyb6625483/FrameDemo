@@ -110,6 +110,8 @@ public class ChatClient {
                             } else if (msg instanceof ChatResponseMessage) {
                                 ChatResponseMessage message = (ChatResponseMessage) msg;
                                 log.info("接收到【{}】的消息：{}", message.getFrom(), message.getContent());
+                            } else {
+                                log.info("{}", msg);
                             }
                         }
                     });
