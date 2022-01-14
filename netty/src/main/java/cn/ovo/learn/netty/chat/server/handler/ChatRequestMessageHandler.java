@@ -13,14 +13,14 @@ public class ChatRequestMessageHandler extends SimpleChannelInboundHandler<ChatR
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, ChatRequestMessage msg) throws Exception {
         String to = msg.getTo();
+        // 获取指定用户的channel
         Channel channel = SessionFactory.getSession().getChannel(to);
-        // 在线
         if (channel != null) {
+            // 在线
             channel.writeAndFlush(new ChatResponseMessage(msg.getFrom(), msg.getContent()));
-        }
-        // 不在线
-        else {
-            ctx.writeAndFlush(new ChatResponseMessage(false, "对方用户不存在或者不在线"));
+        } else {
+            // 不在线
+            ctx.writeAndFlush(new ChatResponseMessage(false, "用户【" + to + "】不存在或者不在线"));
         }
     }
 }
