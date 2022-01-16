@@ -20,10 +20,11 @@ public class SessionMemoryImpl implements Session {
     }
 
     @Override
-    public void unbind(Channel channel) {
+    public String unbind(Channel channel) {
         String username = CHANNEL_MAP.remove(channel);
         ATTRIBUTE_MAP.remove(channel);
         USER_MAP.remove(username);
+        return username;
     }
 
     @Override
@@ -40,5 +41,10 @@ public class SessionMemoryImpl implements Session {
     @Override
     public Channel getChannel(String username) {
         return USER_MAP.get(username);
+    }
+
+    @Override
+    public String getUser(Channel channel) {
+        return CHANNEL_MAP.get(channel);
     }
 }

@@ -10,6 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 @ChannelHandler.Sharable
 public class GroupQuitRequestMessageHandler extends SimpleChannelInboundHandler<GroupQuitRequestMessage> {
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GroupQuitRequestMessage msg) throws Exception {
         Group group = GroupSessionFactory.getGroupSession().removeMember(msg.getGroupName(), msg.getUsername());

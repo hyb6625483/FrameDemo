@@ -18,8 +18,9 @@ public interface Session {
     /**
      * 解绑会话
      * @param channel 哪个 channel 要解绑会话
+     * @return
      */
-    void unbind(Channel channel);
+    String unbind(Channel channel);
 
     /**
      * 获取属性
@@ -43,4 +44,11 @@ public interface Session {
      * @return channel
      */
     Channel getChannel(String username);
+
+    /**
+     * 根据 channel 获取用户名
+     * @param channel 哪个 channel
+     * @return username
+     */
+    String getUser(Channel channel);
 }

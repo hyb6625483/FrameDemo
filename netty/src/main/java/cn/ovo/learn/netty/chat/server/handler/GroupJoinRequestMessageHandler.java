@@ -10,6 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 
 @ChannelHandler.Sharable
 public class GroupJoinRequestMessageHandler extends SimpleChannelInboundHandler<GroupJoinRequestMessage> {
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GroupJoinRequestMessage msg) throws Exception {
         Group group = GroupSessionFactory.getGroupSession().joinMember(msg.getGroupName(), msg.getUsername());
