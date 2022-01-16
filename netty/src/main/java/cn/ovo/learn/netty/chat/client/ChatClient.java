@@ -9,6 +9,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
+import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -37,6 +40,16 @@ public class ChatClient {
             bootstrap.handler(new ChannelInitializer<NioSocketChannel>() {
                 @Override
                 protected void initChannel(NioSocketChannel ch) throws Exception {
+                    ch.pipeline().addLast(new IdleStateHandler(0,3,0));
+                    ch.pipeline().addLast(new ChannelDuplexHandler() {
+                        @Override
+                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+                            IdleStateEvent event = (IdleStateEvent) evt;
+                            if (event.state() == IdleState.WRITER_IDLE) {
+                                ctx.writeAndFlush(new PingMessage());
+                            }
+                        }
+                    });
                     ch.pipeline().addLast(new ProcotolFrameDecoder());
 //                    ch.pipeline().addLast(loggingHandler);
                     ch.pipeline().addLast(messageCodec);
