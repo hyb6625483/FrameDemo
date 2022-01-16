@@ -1,5 +1,6 @@
-package cn.ovo.learn.netty.chat.message;
+package cn.ovo.learn.netty.rpc.message;
 
+import cn.ovo.learn.netty.chat.message.Message;
 import lombok.Getter;
 import lombok.ToString;
 

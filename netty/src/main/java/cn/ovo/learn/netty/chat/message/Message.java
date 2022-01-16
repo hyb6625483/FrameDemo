@@ -1,5 +1,7 @@
 package cn.ovo.learn.netty.chat.message;
 
+import cn.ovo.learn.netty.rpc.message.RpcRequestMessage;
+import cn.ovo.learn.netty.rpc.message.RpcResponseMessage;
 import lombok.Data;
 
 import java.io.Serializable;
