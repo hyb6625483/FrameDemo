@@ -18,7 +18,9 @@ public interface Serializer {
     <T> byte[] serialize(T object);
 
     enum Algorithm implements Serializer {
-
+        /**
+         * Java序列化
+         */
         Java {
             @Override
             public <T> T deserialize(Class<T> clazz, byte[] bytes) {
@@ -42,7 +44,9 @@ public interface Serializer {
                 }
             }
         },
-
+        /**
+         * JSON序列化
+         */
         Json {
             @Override
             public <T> T deserialize(Class<T> clazz, byte[] bytes) {
