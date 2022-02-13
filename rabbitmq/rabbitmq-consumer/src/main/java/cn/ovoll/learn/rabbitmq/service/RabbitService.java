@@ -1,4 +1,4 @@
-package com.rabbitmq.demo.service;
+package cn.ovoll.learn.rabbitmq.service;
 
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

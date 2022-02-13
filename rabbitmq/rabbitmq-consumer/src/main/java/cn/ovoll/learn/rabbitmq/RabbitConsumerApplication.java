@@ -1,4 +1,4 @@
-package com.rabbitmq.demo;
+package cn.ovoll.learn.rabbitmq;
 
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;

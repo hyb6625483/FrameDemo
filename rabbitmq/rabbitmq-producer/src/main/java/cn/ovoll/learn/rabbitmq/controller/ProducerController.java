@@ -1,4 +1,4 @@
-package com.rabbitmq.demo.controller;
+package cn.ovoll.learn.rabbitmq.controller;
 
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
@@ -6,7 +6,6 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 
@@ -17,7 +16,6 @@ public class ProducerController {
     @Resource
     private AmqpAdmin amqpAdmin;
 
-    @RequestMapping("/hello")
     public String test1(String param) {
         amqpAdmin.declareExchange(new DirectExchange("myTestAmq.exchange"));
         amqpAdmin.declareQueue(new Queue("myTestAmq.queue"));

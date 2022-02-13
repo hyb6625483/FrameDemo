@@ -1,12 +1,12 @@
-package com.rabbitmq.demo;
+package cn.ovoll.learn.rabbitmq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RabbitProducerApplication {
+public class RabbitmqProducerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RabbitProducerApplication.class);
+        SpringApplication.run(RabbitmqProducerApplication.class);
     }
 }
