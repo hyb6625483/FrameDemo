@@ -1,4 +1,4 @@
-package cn.ovoll.learn.rabbitmq.common;
+package cn.ovoll.learn.rabbitmq.config;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

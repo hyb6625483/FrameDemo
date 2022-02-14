@@ -10,7 +10,7 @@
     <groupId>cn.ovo.learn</groupId>
     <artifactId>rabbitmq-consumer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rabbitmq-producer</name>
+    <name>rabbitmq-consumer</name>
 
     <description>Rabbitmq Consumer project for Spring Boot</description>
 
@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
         <!--rabbitmq-->
         <dependency>
@@ -31,6 +31,6 @@
     </dependencies>
 
     <build>
-        <finalName>rabbitmq-producer</finalName>
+        <finalName>rabbitmq-consumer</finalName>
     </build>
 </project>
