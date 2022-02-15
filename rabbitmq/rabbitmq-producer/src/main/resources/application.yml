@@ -6,10 +6,10 @@ spring:
     password: admin123.
     virtual-host: /demo
     connection-timeout: 15000
-  #    publisher-confirms: true  #启用消息确认模式
-#    publisher-returns: true   #
-#    template:
-#      mandatory: true
+    publisher-confirm-type: correlated # 开启消息确认回调
+    publisher-returns: true   # 开启消息回退回调
+    template:
+      mandatory: true
   #参数格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

@@ -16,17 +16,32 @@ public class RabbitConfig {
      */
     @Bean
     public Exchange fanoutExchange() {
-        return ExchangeBuilder.fanoutExchange(RabbitConstants.EXCHANGE_NAME).build();
+        return ExchangeBuilder.fanoutExchange(RabbitConstants.FANOUT_EXCHANGE).build();
     }
 
     @Bean
-    public Queue fanoutQueue1() {
-        return QueueBuilder.durable(RabbitConstants.QUEUE_NAME).build();
+    public Queue fanoutQueue() {
+        return QueueBuilder.durable(RabbitConstants.FANOUT_QUEUE).build();
     }
 
     @Bean
     public Binding fanoutBinding() {
-        return BindingBuilder.bind(fanoutQueue1()).to(fanoutExchange()).with("").noargs();
+        return BindingBuilder.bind(fanoutQueue()).to(fanoutExchange()).with("").noargs();
+    }
+
+    @Bean
+    public Exchange directExchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.DIRECT_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue directQueue() {
+        return QueueBuilder.durable(RabbitConstants.DIRECT_QUEUE).build();
+    }
+
+    @Bean
+    public Binding directBinding() {
+        return BindingBuilder.bind(directQueue()).to(directExchange()).with("direct").noargs();
     }
 
     /**
