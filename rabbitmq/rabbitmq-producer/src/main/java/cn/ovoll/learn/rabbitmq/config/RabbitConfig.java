@@ -29,6 +29,10 @@ public class RabbitConfig {
         return BindingBuilder.bind(fanoutQueue()).to(fanoutExchange()).with("").noargs();
     }
 
+    /**
+     * 创建一个路由模式的交换机
+     * @return
+     */
     @Bean
     public Exchange directExchange() {
         return ExchangeBuilder.directExchange(RabbitConstants.DIRECT_EXCHANGE).build();
@@ -42,6 +46,45 @@ public class RabbitConfig {
     @Bean
     public Binding directBinding() {
         return BindingBuilder.bind(directQueue()).to(directExchange()).with("direct").noargs();
+    }
+
+    /**
+     * 创建一个死信队列的交换机
+     * @return
+     */
+    @Bean
+    public Exchange deadExchange() {
+        return ExchangeBuilder.topicExchange(RabbitConstants.DEAD_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue deadQueue() {
+        return QueueBuilder.durable(RabbitConstants.DEAD_QUEUE).build();
+    }
+
+    @Bean
+    public Binding deadBinding() {
+        return BindingBuilder.bind(deadQueue()).to(deadExchange()).with("dead.#").noargs();
+    }
+
+    /**
+     * 创建一个通配符模式的交换机
+     * @return
+     */
+    @Bean
+    public Exchange topicExchange() {
+        return ExchangeBuilder.topicExchange(RabbitConstants.TOPIC_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue topicQueue() {
+        return QueueBuilder.durable(RabbitConstants.TOPIC_QUEUE).ttl(10000).maxLength(10)
+                .deadLetterExchange(RabbitConstants.DEAD_EXCHANGE).deadLetterRoutingKey("dead.test").build();
+    }
+
+    @Bean
+    public Binding topicBinding() {
+        return BindingBuilder.bind(topicQueue()).to(topicExchange()).with("topic.#").noargs();
     }
 
     /**

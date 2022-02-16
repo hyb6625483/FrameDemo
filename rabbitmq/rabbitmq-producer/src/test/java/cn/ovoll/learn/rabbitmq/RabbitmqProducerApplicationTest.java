@@ -51,4 +51,21 @@ public class RabbitmqProducerApplicationTest {
         });
         template.convertAndSend(RabbitConstants.DIRECT_EXCHANGE,"direct", "测试Springboot整合RabbitMQ");
     }
+
+    @Test
+    void testTTL() {
+        template.convertAndSend(RabbitConstants.DIRECT_EXCHANGE, "direct", "测试Springboot整合RabbitMQ", message -> {
+            // 设置消息过期时间
+            message.getMessageProperties().setExpiration("5000");
+            // 返回该消息
+            return message;
+        });
+    }
+
+    @Test
+    void testDeadLetter() {
+        for (int i = 0; i < 11; i++) {
+            template.convertAndSend(RabbitConstants.TOPIC_EXCHANGE,"topic.test", i + ".测试Springboot整合RabbitMQ");
+        }
+    }
 }
