@@ -68,4 +68,9 @@ public class RabbitmqProducerApplicationTest {
             template.convertAndSend(RabbitConstants.TOPIC_EXCHANGE,"topic.test", i + ".测试Springboot整合RabbitMQ");
         }
     }
+
+    @Test
+    void testOrderQueue() {
+        template.convertAndSend(RabbitConstants.ORDER_EXCHANGE,"order.test", "测试订单状态检查");
+    }
 }

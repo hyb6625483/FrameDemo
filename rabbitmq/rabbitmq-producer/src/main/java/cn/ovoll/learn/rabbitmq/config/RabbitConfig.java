@@ -88,6 +88,42 @@ public class RabbitConfig {
     }
 
     /**
+     * 创建一个延迟队列
+     */
+    @Bean
+    public Exchange orderExchange() {
+        return ExchangeBuilder.topicExchange(RabbitConstants.ORDER_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue orderQueue() {
+        return QueueBuilder.durable(RabbitConstants.ORDER_QUEUE).ttl(10000).maxLength(10)
+                .deadLetterExchange(RabbitConstants.DLX_ORDER_EXCHANGE).deadLetterRoutingKey("order.check").build();
+    }
+
+    @Bean
+    public Binding orderBinding() {
+        return BindingBuilder.bind(orderQueue()).to(orderExchange()).with("order.#").noargs();
+    }
+
+    @Bean
+    public Exchange dlxOrderExchange() {
+        return ExchangeBuilder.directExchange(RabbitConstants.DLX_ORDER_EXCHANGE).build();
+    }
+
+    @Bean
+    public Queue dlxOrderQueue() {
+        return QueueBuilder.durable(RabbitConstants.DLX_ORDER_QUEUE).build();
+    }
+
+    @Bean
+    public Binding dlxOrderBinding() {
+        return BindingBuilder.bind(dlxOrderQueue()).to(dlxOrderExchange()).with("order.check").noargs();
+    }
+
+
+
+    /**
      * rabbitMQ序列化格式
      */
     @Bean
