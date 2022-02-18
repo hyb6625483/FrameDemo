@@ -1,31 +1,17 @@
 spring:
   rabbitmq:
-    addresses: 106.13.36.105:5680
+    host: 192.168.31.4
+    port: 5672
     username: admin
-    password: admin..
-    virtual-host: /
+    password: admin123.
+    virtual-host: /demo
     connection-timeout: 15000
-    publisher-confirms: true  #启用消息确认模式
-    publisher-returns: true   #
+    publisher-confirm-type: correlated # 开启消息确认回调
+    publisher-returns: true   # 开启消息回退回调
     template:
       mandatory: true
-  #编码格式
-  http:
-    encoding:
-      charset: utf-8
   #参数格式
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
     default-property-inclusion: non_null
-  mvc:
-    view:
-      prefix: /WEB-INF/
-      suffix: .jsp
-
-
-#tomcat配置
-server:
-  port: 8081
-  servlet:
-    context-path: /
