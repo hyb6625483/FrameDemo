@@ -7,6 +7,9 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 public class RabbitConfig {
 
@@ -121,8 +124,27 @@ public class RabbitConfig {
         return BindingBuilder.bind(dlxOrderQueue()).to(dlxOrderExchange()).with("order.check").noargs();
     }
 
+    /**
+     * 创建一个插件实现的延迟队列
+     */
+    @Bean
+    public Exchange delayedExchange() {
+        Map<String, Object> args = new HashMap<>();
+        // 定义交换机类型
+        args.put("x-delayed-type", "direct");
+        return new CustomExchange(RabbitConstants.DELAYED_EXCHANGE, RabbitConstants.DELAYED_EXCHANGE_TYPE, true, false, args);
+    }
 
+    @Bean
+    public Queue delayedQueue() {
+        return QueueBuilder.durable(RabbitConstants.DELAYED_QUEUE).build();
+    }
 
+    @Bean
+    public Binding delayedBinding() {
+        return BindingBuilder.bind(deadQueue()).to(delayedExchange()).with("delayed.routing_key").noargs();
+    }
+    
     /**
      * rabbitMQ序列化格式
      */

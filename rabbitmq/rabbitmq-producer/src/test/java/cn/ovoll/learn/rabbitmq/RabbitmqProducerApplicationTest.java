@@ -15,7 +15,7 @@ public class RabbitmqProducerApplicationTest {
 
     @Test
     void test() {
-        template.convertAndSend(RabbitConstants.FANOUT_EXCHANGE,"", "测试Springboot整合RabbitMQ");
+        template.convertAndSend(RabbitConstants.FANOUT_EXCHANGE, "", "测试Springboot整合RabbitMQ");
     }
 
     @Test
@@ -23,7 +23,7 @@ public class RabbitmqProducerApplicationTest {
         // correlationData：投递消息的相关信息
         // ack：是否成功投递消息至交换机
         // cause：失败原因
-        template.setConfirmCallback((correlationData, ack, cause)->{
+        template.setConfirmCallback((correlationData, ack, cause) -> {
             System.out.println("confirm回调方法执行了。。。");
             if (ack) {
                 System.out.println("消息发送成功");
@@ -32,7 +32,7 @@ public class RabbitmqProducerApplicationTest {
                 // TODO 消息重发
             }
         });
-        template.convertAndSend(RabbitConstants.FANOUT_EXCHANGE + 1,"", "测试Springboot整合RabbitMQ");
+        template.convertAndSend(RabbitConstants.FANOUT_EXCHANGE + 1, "", "测试Springboot整合RabbitMQ");
     }
 
     @Test
@@ -45,11 +45,11 @@ public class RabbitmqProducerApplicationTest {
         // replyText: 错误消息
         // exchange: 交换机
         // routingKey: 路由key
-        template.setReturnCallback((message, replyCode, replyText, exchange, routingKey)->{
+        template.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
             System.out.println("执行了return回调");
             // TODO 消息重试
         });
-        template.convertAndSend(RabbitConstants.DIRECT_EXCHANGE,"direct", "测试Springboot整合RabbitMQ");
+        template.convertAndSend(RabbitConstants.DIRECT_EXCHANGE, "direct", "测试Springboot整合RabbitMQ");
     }
 
     @Test
@@ -65,12 +65,24 @@ public class RabbitmqProducerApplicationTest {
     @Test
     void testDeadLetter() {
         for (int i = 0; i < 11; i++) {
-            template.convertAndSend(RabbitConstants.TOPIC_EXCHANGE,"topic.test", i + ".测试Springboot整合RabbitMQ");
+            template.convertAndSend(RabbitConstants.TOPIC_EXCHANGE, "topic.test", i + ".测试Springboot整合RabbitMQ");
         }
     }
 
     @Test
     void testOrderQueue() {
-        template.convertAndSend(RabbitConstants.ORDER_EXCHANGE,"order.test", "测试订单状态检查");
+        template.convertAndSend(RabbitConstants.ORDER_EXCHANGE, "order.test", "测试订单状态检查");
+    }
+
+    @Test
+    void testDelayedQueue() {
+        template.convertAndSend(RabbitConstants.DELAYED_EXCHANGE, "delayed.routing_key", "这是一条延迟30秒的消息", message -> {
+            message.getMessageProperties().setDelay(30 * 1000);
+            return message;
+        });
+        template.convertAndSend(RabbitConstants.DELAYED_EXCHANGE, "delayed.routing_key", "这是一条延迟10秒的消息", message -> {
+            message.getMessageProperties().setDelay(10 * 1000);
+            return message;
+        });
     }
 }

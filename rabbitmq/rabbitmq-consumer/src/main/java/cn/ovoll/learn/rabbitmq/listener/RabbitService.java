@@ -19,6 +19,7 @@ public class RabbitService {
     private static final String TOPIC_QUEUE = "springboot_topic_queue";
     private static final String DEAD_QUEUE = "springboot_dead_queue";
     private static final String ORDER_QUEUE = "springboot_order_dlx_queue";
+    private static final String DELAYED_QUEUE = "delayed.queue";
 
     @RabbitListener(queues = FANOUT_QUEUE)
     public void demo(Message msg) throws Exception {
@@ -92,6 +93,23 @@ public class RabbitService {
     @RabbitListener(queues = ORDER_QUEUE)
     @RabbitHandler
     public void orderQueue(@Payload String msg, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws Exception {
+        try {
+            // 消费者操作
+            System.out.println("收到消息："+ msg);
+            // 手动签收消息
+            channel.basicAck(deliveryTag, true);
+        } catch (IOException e) {
+            // 第三个参数表示是否重回队列
+            channel.basicNack(deliveryTag, true, true);
+        }
+    }
+
+    /**
+     * 监听插件延迟队列
+     */
+    @RabbitListener(queues = DELAYED_QUEUE)
+    @RabbitHandler
+    public void delayedQueue(@Payload String msg, @Header(AmqpHeaders.DELIVERY_TAG) long deliveryTag, Channel channel) throws Exception {
         try {
             // 消费者操作
             System.out.println("收到消息："+ msg);

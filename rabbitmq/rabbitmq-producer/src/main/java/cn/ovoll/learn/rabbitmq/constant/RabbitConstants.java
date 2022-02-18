@@ -14,6 +14,10 @@ public interface RabbitConstants {
 
     String DLX_ORDER_EXCHANGE = "springboot_order_dlx";
 
+    String DELAYED_EXCHANGE = "delayed.exchange";
+
+    String DELAYED_EXCHANGE_TYPE = "x-delayed-message";
+
     String FANOUT_QUEUE = "springboot_fanout_queue";
 
     String DIRECT_QUEUE = "springboot_direct_queue";
@@ -25,4 +29,6 @@ public interface RabbitConstants {
     String ORDER_QUEUE = "springboot_order_queue";
 
     String DLX_ORDER_QUEUE = "springboot_order_dlx_queue";
+
+    String DELAYED_QUEUE = "delayed.queue";
 }
