@@ -24,6 +24,7 @@
         <module>dubbo/dubbo-consumer</module>
         <module>dubbo/dubbo-common</module>
         <module>netty</module>
+        <module>zookeeper</module>
     </modules>
 
     <name>parent</name>
