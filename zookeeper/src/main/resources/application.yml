@@ -1,1 +1,11 @@
-
+zookeeper:
+  #zookeeper服务连接IP与端口
+  address: 192.168.31.4:2181
+  #每次重试时间间隔，单位毫秒
+  base-sleep-time: 1000
+  #重试次数
+  max-retries: 3
+  #会话超时时间，单位毫秒
+  session-timeout: 30000
+  #连接创建超时时间，单位毫秒
+  connection-timeout: 5000
