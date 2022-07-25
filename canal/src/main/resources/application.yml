@@ -8,10 +8,10 @@ spring:
     connection-timeout: 15000
     listener:
       simple:
-        prefetch: 1               # ÏŞÁ÷²ßÂÔ£ºÍ¬Ò»Ê±¼äÖ»ÓĞ1ÌõÏûÏ¢·¢ËÍ¹ıÀ´Ïû·Ñ
-        acknowledge-mode: manual  # Ç©ÊÕÄ£Ê½£ºÊÖ¶¯Ç©ÊÕ
-        concurrency: 5            # »ù±¾²¢·¢£º5
-        max-concurrency: 10       # ×î´ó²¢·¢£º10
+        prefetch: 1               # é™æµç­–ç•¥ï¼šåŒä¸€æ—¶é—´åªæœ‰1æ¡æ¶ˆæ¯å‘é€è¿‡æ¥æ¶ˆè´¹
+        acknowledge-mode: manual  # ç­¾æ”¶æ¨¡å¼ï¼šæ‰‹åŠ¨ç­¾æ”¶
+        concurrency: 5            # åŸºæœ¬å¹¶å‘ï¼š5
+        max-concurrency: 10       # æœ€å¤§å¹¶å‘ï¼š10
   canal:
     host: 127.0.0.1
     port: 8081

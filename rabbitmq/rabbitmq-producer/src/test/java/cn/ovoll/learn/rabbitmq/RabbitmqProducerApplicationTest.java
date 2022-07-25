@@ -45,7 +45,7 @@ public class RabbitmqProducerApplicationTest {
         // replyText: 错误消息
         // exchange: 交换机
         // routingKey: 路由key
-        template.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
+        template.setReturnsCallback(returned -> {
             System.out.println("执行了return回调");
             // TODO 消息重试
         });

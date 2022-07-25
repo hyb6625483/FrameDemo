@@ -1,10 +1,10 @@
 package cn.ovo.learn.netty.chat.message;
 
 import lombok.Data;
-import lombok.ToString;
+import lombok.EqualsAndHashCode;
 
 @Data
-@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public abstract class AbstractResponseMessage extends Message {
     private boolean success;
     private String reason;
