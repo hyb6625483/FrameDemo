@@ -23,6 +23,8 @@
         <module>netty</module>
         <module>zookeeper</module>
         <module>canal</module>
+        <module>kafka/kafka-producer</module>
+        <module>kafka/kafka-consumer</module>
     </modules>
 
     <properties>
